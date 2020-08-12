@@ -26,6 +26,7 @@ const Films = () => {
       console.log(asistentes.data);
     }
     traerAsitentes();
+    // eslint-disable-next-line
   }, [])
 
   return (

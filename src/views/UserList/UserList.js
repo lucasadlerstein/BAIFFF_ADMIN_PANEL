@@ -25,6 +25,7 @@ const UserList = () => {
       setUsers(asistentes.data);
     }
     traerAsitentes();
+    // eslint-disable-next-line
   }, [])
 
   return (

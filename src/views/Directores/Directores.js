@@ -26,6 +26,7 @@ const Directores = () => {
       console.log(directores.data);
     }
     traerAsitentes();
+    // eslint-disable-next-line
   }, []);
 
   return (
