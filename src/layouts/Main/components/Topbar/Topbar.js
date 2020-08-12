@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
 const useStyles = makeStyles(theme => ({
@@ -20,12 +19,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const Topbar = props => {
+
+  const cerrarSesion = () => {
+    window.localStorage.removeItem('ad547sss8456621');
+    window.location.replace('/sign-in');
+  }
+
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
-
-  const [notifications] = useState([]);
 
   return (
     <AppBar
@@ -35,24 +39,17 @@ const Topbar = props => {
       <Toolbar>
         <RouterLink to="/">
           <img
-            alt="Logo"
-            src="/images/logos/logo--white.svg"
+            height="40px"
+            alt="Logo Infinidad"
+            src="/images/logos/logo-infinidad.png"
           />
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
-          <IconButton color="inherit">
-            <Badge
-              badgeContent={notifications.length}
-              color="primary"
-              variant="dot"
-            >
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={()=>cerrarSesion()}
           >
             <InputIcon />
           </IconButton>

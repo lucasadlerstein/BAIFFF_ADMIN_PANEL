@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
@@ -23,6 +23,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Main = props => {
+
+  useEffect(() => {
+    let hoy = new Date;
+    let entrar = window.localStorage.getItem('ad547sss8456621');
+    if(entrar){
+      if (parseInt(entrar) !== (hoy.getDate()*15)) {
+        window.location.replace("/sign-in");
+      }
+    } else {
+      window.location.replace("/sign-in");
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const { children } = props;
 
   const classes = useStyles();

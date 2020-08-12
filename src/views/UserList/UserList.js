@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
+import clienteAxios from '../../config/axios';
+
 import { UsersToolbar, UsersTable } from './components';
-import mockData from './data';
+// import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,9 +16,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserList = () => {
+  const [users, setUsers] = useState([]);
   const classes = useStyles();
 
-  const [users] = useState(mockData);
+  useEffect(()=> {
+    const traerAsitentes = async () => {
+      const asistentes = await clienteAxios.get('/api/asistentes');
+      setUsers(asistentes.data);
+    }
+    traerAsitentes();
+  }, [])
 
   return (
     <div className={classes.root}>

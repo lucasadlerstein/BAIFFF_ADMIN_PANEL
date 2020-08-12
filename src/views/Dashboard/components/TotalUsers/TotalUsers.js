@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TotalUsers = props => {
-  const { className, ...rest } = props;
+const TotalUsers = (props) => {
+  const { asistentes, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -62,9 +62,9 @@ const TotalUsers = props => {
               gutterBottom
               variant="body2"
             >
-              TOTAL USERS
+              VIEWERS TOTALES
             </Typography>
-            <Typography variant="h3">1,600</Typography>
+            <Typography variant="h3">{asistentes}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
@@ -72,21 +72,6 @@ const TotalUsers = props => {
             </Avatar>
           </Grid>
         </Grid>
-        <div className={classes.difference}>
-          <ArrowUpwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            16%
-          </Typography>
-          <Typography
-            className={classes.caption}
-            variant="caption"
-          >
-            Since last month
-          </Typography>
-        </div>
       </CardContent>
     </Card>
   );

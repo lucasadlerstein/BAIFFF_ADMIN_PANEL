@@ -26,8 +26,9 @@ const Topbar = props => {
       <Toolbar>
         <RouterLink to="/">
           <img
-            alt="Logo"
-            src="/images/logos/logo--white.svg"
+            height="40px"
+            alt="Logo Infinidad"
+            src="/images/logos/logo-infinidad.png"
           />
         </RouterLink>
       </Toolbar>

@@ -8,13 +8,15 @@ import {
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
-  Typography as TypographyView,
-  Icons as IconsView,
-  Account as AccountView,
-  Settings as SettingsView,
-  SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  NuevoTaller as NuevoTallerView,
+  EditarTaller as EditarTallerView,
+  Directores as DirectoresView,
+  Films as FilmsView,
+  Agenda as AgendaView,
+  NuevoAgenda as NuevoAgendaView,
+  EditarAgenda as EditarAgendaView
 } from './views';
 
 const Routes = () => {
@@ -35,43 +37,55 @@ const Routes = () => {
         component={UserListView}
         exact
         layout={MainLayout}
-        path="/users"
+        path="/usuarios"
       />
       <RouteWithLayout
         component={ProductListView}
         exact
         layout={MainLayout}
-        path="/products"
+        path="/talleres"
       />
       <RouteWithLayout
-        component={TypographyView}
+        component={AgendaView}
         exact
         layout={MainLayout}
-        path="/typography"
+        path="/agenda"
       />
       <RouteWithLayout
-        component={IconsView}
+        component={DirectoresView}
         exact
         layout={MainLayout}
-        path="/icons"
+        path="/directores"
       />
       <RouteWithLayout
-        component={AccountView}
+        component={FilmsView}
         exact
         layout={MainLayout}
-        path="/account"
+        path="/films"
       />
       <RouteWithLayout
-        component={SettingsView}
+        component={NuevoTallerView}
         exact
         layout={MainLayout}
-        path="/settings"
+        path="/nuevo-taller"
       />
       <RouteWithLayout
-        component={SignUpView}
+        component={EditarTallerView}
         exact
-        layout={MinimalLayout}
-        path="/sign-up"
+        layout={MainLayout}
+        path="/editar-taller"
+      />
+      <RouteWithLayout
+        component={NuevoAgendaView}
+        exact
+        layout={MainLayout}
+        path="/nuevo-evento"
+      />
+      <RouteWithLayout
+        component={EditarAgendaView}
+        exact
+        layout={MainLayout}
+        path="/editar-agenda"
       />
       <RouteWithLayout
         component={SignInView}

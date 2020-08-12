@@ -1,16 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import clienteAxios from '../../config/axios';
 
 import {
   Budget,
   TotalUsers,
   TasksProgress,
   TotalProfit,
-  LatestSales,
-  UsersByDevice,
-  LatestProducts,
-  LatestOrders
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +18,21 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+
+  const [estadisticas, setEstadisticas] = useState({
+    talleres: 0,
+    asistentes: 0,
+    films: 0
+  });
+
+  useEffect(() => {
+    const traerDatos = async () => {
+      const estadisticasDB = await clienteAxios.get('/api/dashboard/estadisticas');
+      setEstadisticas(estadisticasDB.data);
+    }
+    traerDatos();
+  //eslint-disable-next-line
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -35,7 +47,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <Budget />
+          <Budget talleres={estadisticas.talleres} />
         </Grid>
         <Grid
           item
@@ -44,7 +56,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalUsers />
+          <TotalUsers asistentes={estadisticas.asistentes} />
         </Grid>
         <Grid
           item
@@ -53,7 +65,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TasksProgress />
+          <TasksProgress films={estadisticas.films} />
         </Grid>
         <Grid
           item
@@ -63,42 +75,6 @@ const Dashboard = () => {
           xs={12}
         >
           <TotalProfit />
-        </Grid>
-        <Grid
-          item
-          lg={8}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <LatestSales />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          md={6}
-          xl={3}
-          xs={12}
-        >
-          <UsersByDevice />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          md={6}
-          xl={3}
-          xs={12}
-        >
-          <LatestProducts />
-        </Grid>
-        <Grid
-          item
-          lg={8}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <LatestOrders />
         </Grid>
       </Grid>
     </div>

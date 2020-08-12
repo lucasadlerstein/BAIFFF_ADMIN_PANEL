@@ -5,7 +5,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { ProductsToolbar, ProductCard } from './components';
-import mockData from './data';
+import clienteAxios from '../../config/axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +25,19 @@ const useStyles = makeStyles(theme => ({
 const ProductList = () => {
   const classes = useStyles();
 
-  const [products] = useState(mockData);
+  const [talleres, setTalleres] = useState([]);
+  const [num, setNum] = useState(1);
+
+  const traerTalleres = async () => {
+    const talleresBD = await clienteAxios.get('/api/talleres/todos');
+    setTalleres(talleresBD.data);
+    setNum(0);
+    console.log(talleres);
+    console.log(num);
+  }
+  if(num === 1){
+    traerTalleres();
+  }
 
   return (
     <div className={classes.root}>
@@ -35,21 +47,21 @@ const ProductList = () => {
           container
           spacing={3}
         >
-          {products.map(product => (
+          {talleres.map(taller => (
             <Grid
               item
-              key={product.id}
+              key={taller.id}
               lg={4}
               md={6}
               xs={12}
             >
-              <ProductCard product={product} />
+              <ProductCard product={taller} />
             </Grid>
           ))}
         </Grid>
       </div>
       <div className={classes.pagination}>
-        <Typography variant="caption">1-6 of 20</Typography>
+        <Typography variant="caption">1-6 of {talleres.length}</Typography>
         <IconButton>
           <ChevronLeftIcon />
         </IconButton>

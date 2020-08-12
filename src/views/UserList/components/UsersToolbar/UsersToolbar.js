@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 
-import { SearchInput } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -17,13 +17,7 @@ const useStyles = makeStyles(theme => ({
   spacer: {
     flexGrow: 1
   },
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
   exportButton: {
-    marginRight: theme.spacing(1)
-  },
-  searchInput: {
     marginRight: theme.spacing(1)
   }
 }));
@@ -33,6 +27,21 @@ const UsersToolbar = props => {
 
   const classes = useStyles();
 
+  const descargarAsistentes = async () => {
+    axios({
+      url: 'http://api.baifff.tv/api/asistentes/descargar',
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+       const url = window.URL.createObjectURL(new Blob([response.data]));
+       const link = document.createElement('a');
+       link.href = url;
+       link.setAttribute('download', 'asistentes.xlsx');
+       document.body.appendChild(link);
+       link.click();
+    });
+  }
+
   return (
     <div
       {...rest}
@@ -40,20 +49,10 @@ const UsersToolbar = props => {
     >
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
         <Button
-          color="primary"
-          variant="contained"
-        >
-          Add user
-        </Button>
-      </div>
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search user"
-        />
+          className={classes.exportButton}
+          onClick={() => descargarAsistentes() }
+        >Descargar</Button>
       </div>
     </div>
   );

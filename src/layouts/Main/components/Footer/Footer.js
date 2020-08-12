@@ -24,16 +24,12 @@ const Footer = props => {
         &copy;{' '}
         <Link
           component="a"
-          href="https://devias.io/"
+          href="https://desarrollo.infinidad.com.ar"
           target="_blank"
         >
-          Devias IO
+          Infinidad Desarrollo
         </Link>
-        . 2019
-      </Typography>
-      <Typography variant="caption">
-        Created with love for the environment. By designers and developers who
-        love to work together in offices!
+        . 2020
       </Typography>
     </div>
   );

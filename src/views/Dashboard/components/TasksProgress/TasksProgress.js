@@ -10,7 +10,7 @@ import {
   Avatar,
   LinearProgress
 } from '@material-ui/core';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import TheatersIcon from '@material-ui/icons/Theaters';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TasksProgress = props => {
-  const { className, ...rest } = props;
+  const { films, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -60,21 +60,16 @@ const TasksProgress = props => {
               gutterBottom
               variant="body2"
             >
-              TASKS PROGRESS
+              FILMS INSCRIPTOS
             </Typography>
-            <Typography variant="h3">75.5%</Typography>
+            <Typography variant="h3">{films}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <InsertChartIcon className={classes.icon} />
+              <TheatersIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
-        <LinearProgress
-          className={classes.progress}
-          value={75.5}
-          variant="determinate"
-        />
       </CardContent>
     </Card>
   );

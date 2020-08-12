@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
+import FlashOnIcon from '@material-ui/icons/FlashOn';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Budget = props => {
-  const { className, ...rest } = props;
+const Budget = (props) => {
+  const { talleres, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -62,31 +62,16 @@ const Budget = props => {
               gutterBottom
               variant="body2"
             >
-              BUDGET
+              TALLERES
             </Typography>
-            <Typography variant="h3">$24,000</Typography>
+            <Typography variant="h3">{talleres}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <MoneyIcon className={classes.icon} />
+              <FlashOnIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
-        <div className={classes.difference}>
-          <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            12%
-          </Typography>
-          <Typography
-            className={classes.caption}
-            variant="caption"
-          >
-            Since last month
-          </Typography>
-        </div>
       </CardContent>
     </Card>
   );

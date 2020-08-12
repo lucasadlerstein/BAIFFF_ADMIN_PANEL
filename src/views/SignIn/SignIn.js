@@ -13,18 +13,15 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
-
 const schema = {
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
+  usuario: {
+    presence: { allowEmpty: false, message: 'es obligatorio' },
     length: {
       maximum: 64
     }
   },
   password: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: 'es obligatorio' },
     length: {
       maximum: 128
     }
@@ -172,7 +169,12 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/');
+    if(formState.values.password === 'Infinidad.2020' && formState.values.usuario === 'AdminBAIFFF'){
+      let hoy = new Date;
+      hoy = hoy.getDate();
+      window.localStorage.setItem('ad547sss8456621', (hoy*15));
+      history.push('/');
+    }
   };
 
   const hasError = field =>
@@ -236,61 +238,20 @@ const SignIn = props => {
                   className={classes.title}
                   variant="h2"
                 >
-                  Sign in
-                </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Sign in with social media
-                </Typography>
-                <Grid
-                  className={classes.socialButtons}
-                  container
-                  spacing={2}
-                >
-                  <Grid item>
-                    <Button
-                      color="primary"
-                      onClick={handleSignIn}
-                      size="large"
-                      variant="contained"
-                    >
-                      <FacebookIcon className={classes.socialIcon} />
-                      Login with Facebook
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      onClick={handleSignIn}
-                      size="large"
-                      variant="contained"
-                    >
-                      <GoogleIcon className={classes.socialIcon} />
-                      Login with Google
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Typography
-                  align="center"
-                  className={classes.sugestion}
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  or login with email address
+                  Iniciá sesión
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('email')}
+                  error={hasError('usuario')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('usuario') ? formState.errors.usuario[0] : null
                   }
-                  label="Email address"
-                  name="email"
+                  label="Usuario"
+                  name="usuario"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.usuario || ''}
                   variant="outlined"
                 />
                 <TextField
@@ -300,7 +261,7 @@ const SignIn = props => {
                   helperText={
                     hasError('password') ? formState.errors.password[0] : null
                   }
-                  label="Password"
+                  label="Contraseña"
                   name="password"
                   onChange={handleChange}
                   type="password"
@@ -316,21 +277,8 @@ const SignIn = props => {
                   type="submit"
                   variant="contained"
                 >
-                  Sign in now
+                  Iniciar sesión
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Don't have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/sign-up"
-                    variant="h6"
-                  >
-                    Sign up
-                  </Link>
-                </Typography>
               </form>
             </div>
           </div>

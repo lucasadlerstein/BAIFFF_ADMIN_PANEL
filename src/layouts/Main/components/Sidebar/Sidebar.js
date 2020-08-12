@@ -9,10 +9,13 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import TheatersIcon from '@material-ui/icons/Theaters';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import FlashOnIcon from '@material-ui/icons/FlashOn';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -44,44 +47,34 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: 'Dashboard',
+      title: 'Inicio',
       href: '/dashboard',
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
-      href: '/users',
+      title: 'Usuarios',
+      href: '/usuarios',
       icon: <PeopleIcon />
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Talleres',
+      href: '/talleres',
+      icon: <FlashOnIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
+      title: 'Agenda',
+      href: '/agenda',
+      icon: <AccessTimeIcon />
     },
     {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFieldsIcon />
-    },
-    {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
-    {
-      title: 'Account',
-      href: '/account',
+      title: 'Directores',
+      href: '/directores',
       icon: <AccountBoxIcon />
     },
     {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
+      title: 'Films',
+      href: '/films',
+      icon: <TheatersIcon />
     }
   ];
 
@@ -103,7 +96,6 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
       </div>
     </Drawer>
   );
