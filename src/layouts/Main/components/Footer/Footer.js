@@ -24,7 +24,7 @@ const Footer = props => {
         &copy;{' '}
         <Link
           component="a"
-          href="https://desarrollo.infinidad.com.ar"
+          href="http://desarrollo.infinidad.com.ar"
           target="_blank"
         >
           Infinidad Desarrollo
