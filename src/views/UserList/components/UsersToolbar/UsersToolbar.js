@@ -29,7 +29,7 @@ const UsersToolbar = props => {
 
   const descargarAsistentes = async () => {
     axios({
-      url: 'http://api.baifff.tv/api/asistentes/descargar',
+      url: 'https://api.baifff.tv/api/asistentes/descargar',
       method: 'GET',
       responseType: 'blob',
     }).then((response) => {

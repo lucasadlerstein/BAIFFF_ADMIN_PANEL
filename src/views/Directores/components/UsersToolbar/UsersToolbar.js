@@ -29,7 +29,7 @@ const UsersToolbar = props => {
 
   const descargarAsistentes = async () => {
     axios({
-      url: 'http://api.baifff.tv/api/films/descargarDirectores',
+      url: 'https://api.baifff.tv/api/films/descargarDirectores',
       method: 'GET',
       responseType: 'blob',
     }).then((response) => {
