@@ -40,7 +40,11 @@ const AccountDetails = props => {
   const [values, setValues] = useState({
     titulo_es: '',
     titulo_en: '',
-    texto: '',
+    texto_es: '',
+    texto_en: '',
+    boton_es: '',
+    boton_en: '',
+    link: '',
     dia: 1,
     hora: '',
     duracion: '',
@@ -54,13 +58,25 @@ const AccountDetails = props => {
     });
   };
 
-  const dias = [ 1, 2, 3 ];
+  // const dias = [ 1, 2, 3 ];
+  const dias = [
+    {
+      dia: 1,
+      fecha: '24/09'
+    },
+    {
+      dia: 2,
+      fecha: '25/09'
+    },
+    {
+      dia: 3,
+      fecha: '26/09'
+    }
+  ]
 
   const onSaveImagen = async () => {
-    console.log('onSaveFunction', fileObjects);
     setOpen(false);
 
-    console.log("fileObjects:", fileObjects);
     // Crear formData
     const formDataImagen = new FormData();
     formDataImagen.append('archivo', fileObjects[0]);
@@ -68,14 +84,12 @@ const AccountDetails = props => {
 
     try {
       const subirImagen = await clienteAxios.post('/api/archivos', formDataImagen);
-      console.log('subirImagen', subirImagen);
       setValues(prevState => ({
         ...prevState,
         imagen: subirImagen.data.archivo
       }));
     } catch (error) {
       const mensajeSwal = withReactContent(Swal);
-      console.log(error);
       mensajeSwal.fire({
         title: 'Ups...',
         text: `No pudimos subir la imagen`,
@@ -95,8 +109,10 @@ const AccountDetails = props => {
       errorForm = "El titulo en inglés no puede estar vacío";
     } else if (values.imagen.trim() === ''){
       errorForm = "Falta subir una imagen";
-    } else if (values.texto.trim() === ''){
+    } else if (values.texto_es.trim() === ''){
       errorForm = "El contenido del evento es obligatorio";
+    } else if (values.texto_en.trim() === ''){
+      errorForm = "El contenido en inglés del evento es obligatorio";
     } else if (values.hora.trim() === ''){
       errorForm = "La hora del evento es obligatoria";
     } else if (values.duracion.trim() === ''){
@@ -113,9 +129,7 @@ const AccountDetails = props => {
       }, 3000);
     } else {
       try {
-        console.log('values post', values);
         const postTaller = await clienteAxios.post('/api/programacion', values);
-        console.log(postTaller);
 
         mensajeSwal.fire({
           title: '¡Excelente!',
@@ -220,7 +234,6 @@ const AccountDetails = props => {
                   //   setFileObjects(nuevoArchivo);
                   // }}
                   onDrop={(nuevoArchivo) => {
-                    console.log('onDrop', nuevoArchivo);
                     setFileObjects(nuevoArchivo);
                   }}
                   onDelete={deleteFileObj => {
@@ -243,14 +256,32 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Contenido"
+                label="Contenido en español"
                 margin="dense"
-                name="texto"
+                name="texto_es"
                 onChange={handleChange}
                 required
                 multiline={true}
                 type="text"
-                value={values.texto}
+                value={values.texto_es}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Contenido en inglés"
+                margin="dense"
+                name="texto_en"
+                onChange={handleChange}
+                required
+                multiline={true}
+                type="text"
+                value={values.texto_en}
                 variant="outlined"
               />
             </Grid>
@@ -272,12 +303,12 @@ const AccountDetails = props => {
                 value={values.dia}
                 variant="outlined"
               >
-                {dias.map(option => (
+                {dias.map(opcion => (
                   <option
-                    key={option}
-                    value={option}
+                    key={opcion.dia}
+                    value={opcion.dia}
                   >
-                    {option}
+                    {opcion.fecha}
                   </option>
                 ))}
               </TextField>
@@ -313,6 +344,69 @@ const AccountDetails = props => {
                 required
                 type="text"
                 value={values.duracion}
+                variant="outlined"
+              />
+            </Grid>
+            </Grid>
+          </CardContent>
+          <CardContent>
+            <CardHeader
+              subheader="Solo para talleres donde la agenda los lleve a la página del taller y esté incluído ahí el acceso rápido"
+              title="OPCIONAL TALLERES"
+            />
+            <Divider />
+            <Grid
+              container
+              spacing={3}
+            >
+            <Grid
+              item
+              md={4}
+              xs={6}
+            >
+              <TextField
+                fullWidth
+                label="Botón taller en español"
+                margin="dense"
+                name="boton_es"
+                onChange={handleChange}
+                helperText="Opcional solo para talleres o links externos"
+                type="text"
+                value={values.boton_es}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={6}
+            >
+              <TextField
+                fullWidth
+                label="Botón taller en inglés"
+                margin="dense"
+                name="boton_en"
+                onChange={handleChange}
+                helperText="Opcional solo para talleres o links externos"
+                type="text"
+                value={values.boton_en}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={6}
+            >
+              <TextField
+                fullWidth
+                label="Link del taller o website externo"
+                margin="dense"
+                name="link"
+                onChange={handleChange}
+                helperText="Opcional solo para talleres o links externos"
+                type="text"
+                value={values.link}
                 variant="outlined"
               />
             </Grid>

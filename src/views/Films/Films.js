@@ -23,7 +23,6 @@ const Films = () => {
     const traerAsitentes = async () => {
       const asistentes = await clienteAxios.get('/api/films');
       setUsers(asistentes.data);
-      console.log(asistentes.data);
     }
     traerAsitentes();
     // eslint-disable-next-line

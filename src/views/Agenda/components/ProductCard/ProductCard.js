@@ -141,7 +141,7 @@ const ProductCard = props => {
           align="center"
           variant="body1"
         >
-          {product.texto}
+          {product.texto_es}
         </Typography>
       </CardContent>
       <Divider />

@@ -23,7 +23,6 @@ const Directores = () => {
     const traerAsitentes = async () => {
       const directores = await clienteAxios.get('/api/films/directores');
       setUsers(directores.data);
-      console.log(directores.data);
     }
     traerAsitentes();
     // eslint-disable-next-line

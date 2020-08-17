@@ -44,16 +44,13 @@ const AccountDetails = props => {
     titulo_es: '',
     slug_es: '',
     miniatura: '',
-    descripcion_corta_es: '',
-    descripcion_larga_es: '',
-    codigo_es: '',
+    descripcion_es: '',
+    codigo: '',
     precio_ars: '',
     precio_usd: '',
     titulo_en: '',
     slug_en: '',
-    descripcion_corta_en: '',
-    descripcion_larga_en: '',
-    codigo_en: ''
+    descripcion_en: ''
   });
 
   useEffect(()=> {
@@ -71,7 +68,6 @@ const AccountDetails = props => {
           history.push("/talleres");
         }
       }catch(error){
-        console.log('error', error);
       } 
     }
     rellenarCamposEdicion();
@@ -86,10 +82,8 @@ const AccountDetails = props => {
   };
 
   const onSaveImagen = async () => {
-    console.log('onSaveFunction', fileObjects);
     setOpen(false);
 
-    console.log("fileObjects:", fileObjects);
     // Crear formData
     const formDataImagen = new FormData();
     formDataImagen.append('archivo', fileObjects[0]);
@@ -98,14 +92,12 @@ const AccountDetails = props => {
     const mensajeSwal = withReactContent(Swal);
     try {
       const subirImagen = await clienteAxios.post('/api/archivos', formDataImagen);
-      console.log('subirImagen', subirImagen);
       setValues(prevState => ({
         ...prevState,
         imagen_es: subirImagen.data.archivo,
         imagen_en: subirImagen.data.archivo
       }));
     } catch (error) {
-      console.log(error);
       mensajeSwal.fire({
         title: 'Ups...',
         text: `No pudimos subir la imagen`,
@@ -117,7 +109,6 @@ const AccountDetails = props => {
 
   const enviarFormulario = async (e) => {
     e.preventDefault();
-    console.log('valores', values);
     let errorForm = null;
     // Validacion
     if (values.titulo_es.trim() === ''){
@@ -126,15 +117,13 @@ const AccountDetails = props => {
       errorForm = 'El slug no puede estar vacío';
     } else if (/\s/.test(values.slug_es) || (values.slug_es.indexOf('.') !== -1) ){
       errorForm = 'El slug no puede tener espacios ni puntos';
-    } else if (values.descripcion_corta_es.trim() === ''){
-      errorForm = 'La descripción corta no puede estar vacía';
-    } else if (values.descripcion_larga_es.trim() === ''){
-      errorForm = 'La descripción larga no puede estar vacía';
-    } else if (values.precio_ars.trim() === '' || values.precio_ars < 1 ){
+    } else if (values.descripcion_es.trim() === ''){
+      errorForm = 'La descripción no puede estar vacía';
+    }  else if (values.precio_ars.trim() === '' || values.precio_ars < 1 ){
       errorForm = 'Falta el valor del taller en AR$';
     } else if (values.precio_usd.trim() === '' || values.precio_usd < 1 ){
       errorForm = 'Falta el valor del taller en U$D';
-    } else if (values.codigo_es.trim() === ''){
+    } else if (values.codigo.trim() === ''){
       errorForm = 'El código de producto no puede estar vacío';
     } else if (values.titulo_en.trim() === ''){
       errorForm = 'El titulo en inglés no puede estar vacío';
@@ -142,12 +131,8 @@ const AccountDetails = props => {
       errorForm = 'El slug en inglés no puede estar vacío';
     } else if (/\s/.test(values.slug_en) || (values.slug_en.indexOf('.') !== -1) ){
       errorForm = 'El slug en inglés no puede tener espacios ni puntos';
-    } else if (values.descripcion_corta_en.trim() === ''){
-      errorForm = 'La descripción corta en inglés no puede estar vacía';
-    } else if (values.descripcion_larga_en.trim() === ''){
-      errorForm = 'La descripción larga en inglés no puede estar vacía';
-    } else if (values.codigo_en.trim() === ''){
-      errorForm = 'El código de producto en inglés no puede estar vacío';
+    } else if (values.descripcion_en.trim() === ''){
+      errorForm = 'La descripción en inglés no puede estar vacía';
     } else if (values.imagen_es.trim() === ''){
       errorForm = 'Falta subir una imagen del taller';
     }
@@ -163,9 +148,7 @@ const AccountDetails = props => {
 
     } else {
       try {
-        console.log('values post editar', values);
         const postTaller = await clienteAxios.put(`/api/talleres/${editandoId}`, values);
-        console.log("resultado consulta: ", postTaller);
   
         mensajeSwal.fire({
           title: '¡Excelente!',
@@ -266,11 +249,10 @@ const AccountDetails = props => {
                   filesLimit={1}
                   open={open}
                   onDrop={(nuevoArchivo) => {
-                    console.log('onDrop', nuevoArchivo);
                     setFileObjects(nuevoArchivo);
                   }}
                   onDelete={deleteFileObj => {
-                    console.log('onDelete', deleteFileObj);
+                    // console.log('onDelete', deleteFileObj);
                   }}
                   onClose={() => setOpen(false)}
                   onSave={() => {
@@ -289,34 +271,20 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Descripción corta"
+                label="Descripción"
                 margin="dense"
-                name="descripcion_corta_es"
+                multiline={true}
+                name="descripcion_es"
                 onChange={handleChange}
                 required
-                value={values.descripcion_corta_es}
+                value={values.descripcion_es}
                 variant="outlined"
               />
             </Grid>
+            
             <Grid
               item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Descripción larga"
-                margin="dense"
-                name="descripcion_larga_es"
-                onChange={handleChange}
-                type="text"
-                value={values.descripcion_larga_es}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
@@ -333,7 +301,7 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
@@ -350,18 +318,18 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
                 fullWidth
                 label="Código de compra"
                 margin="dense"
-                name="codigo_es"
+                name="codigo"
                 onChange={handleChange}
                 required
                 type="text"
-                value={values.codigo_es}
+                value={values.codigo}
                 variant="outlined"
               />
             </Grid>
@@ -413,54 +381,22 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
-              xs={6}
-            >
-              <TextField
-                fullWidth
-                label="Código de compra en inglés"
-                margin="dense"
-                name="codigo_en"
-                onChange={handleChange}
-                required
-                type="text"
-                value={values.codigo_en}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
               md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Descripción corta en inglés"
+                label="Descripción en inglés"
                 margin="dense"
-                name="descripcion_corta_en"
+                name="descripcion_en"
+                multiline={true}
                 onChange={handleChange}
                 required
-                value={values.descripcion_corta_en}
+                value={values.descripcion_en}
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Descripción larga en inglés"
-                margin="dense"
-                name="descripcion_larga_en"
-                onChange={handleChange}
-                type="text"
-                value={values.descripcion_larga_en}
-                variant="outlined"
-              />
-            </Grid>
-
+            
         <Divider />
           </Grid>
         </CardContent>

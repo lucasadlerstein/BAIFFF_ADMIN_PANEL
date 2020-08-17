@@ -41,16 +41,13 @@ const AccountDetails = props => {
     titulo_es: '',
     slug_es: '',
     miniatura: '',
-    descripcion_corta_es: '',
-    descripcion_larga_es: '',
-    codigo_es: '',
+    descripcion_es: '',
+    codigo: '',
     precio_ars: '',
     precio_usd: '',
     titulo_en: '',
     slug_en: '',
-    descripcion_corta_en: '',
-    descripcion_larga_en: '',
-    codigo_en: ''
+    descripcion_en: '',
   });
 
   const handleChange = event => {
@@ -60,26 +57,8 @@ const AccountDetails = props => {
     });
   };
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'new-york',
-      label: 'New York'
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco'
-    }
-  ];
-
   const onSaveImagen = async () => {
-    console.log('onSaveFunction', fileObjects);
     setOpen(false);
-
-    console.log("fileObjects:", fileObjects);
     // Crear formData
     const formDataImagen = new FormData();
     formDataImagen.append('archivo', fileObjects[0]);
@@ -87,14 +66,12 @@ const AccountDetails = props => {
 
     try {
       const subirImagen = await clienteAxios.post('/api/archivos', formDataImagen);
-      console.log('subirImagen', subirImagen);
       setValues(prevState => ({
         ...prevState,
         miniatura: subirImagen.data.archivo
       }));
     } catch (error) {
       const mensajeSwal = withReactContent(Swal);
-      console.log(error);
       mensajeSwal.fire({
         title: 'Ups...',
         text: `No pudimos subir la imagen`,
@@ -114,15 +91,13 @@ const AccountDetails = props => {
       errorForm = 'El slug no puede estar vacío';
     } else if (/\s/.test(values.slug_es) || (values.slug_es.indexOf('.') !== -1) ){
       errorForm = 'El slug no puede tener espacios ni puntos';
-    } else if (values.descripcion_corta_es.trim() === ''){
-      errorForm = 'La descripción corta no puede estar vacía';
-    } else if (values.descripcion_larga_es.trim() === ''){
-      errorForm = 'La descripción larga no puede estar vacía';
+    } else if (values.descripcion_es.trim() === ''){
+      errorForm = 'La descripción no puede estar vacía';
     } else if (values.precio_ars.trim() === '' || values.precio_ars < 1 ){
       errorForm = 'Falta el valor del taller en AR$';
     } else if (values.precio_usd.trim() === '' || values.precio_usd < 1 ){
       errorForm = 'Falta el valor del taller en U$D';
-    } else if (values.codigo_es.trim() === ''){
+    } else if (values.codigo.trim() === ''){
       errorForm = 'El código de producto no puede estar vacío';
     } else if (values.titulo_en.trim() === ''){
       errorForm = 'El titulo en inglés no puede estar vacío';
@@ -130,12 +105,8 @@ const AccountDetails = props => {
       errorForm = 'El slug en inglés no puede estar vacío';
     } else if (/\s/.test(values.slug_en) || (values.slug_en.indexOf('.') !== -1) ){
       errorForm = 'El slug en inglés no puede tener espacios ni puntos';
-    } else if (values.descripcion_corta_en.trim() === ''){
-      errorForm = 'La descripción corta en inglés no puede estar vacía';
-    } else if (values.descripcion_larga_en.trim() === ''){
-      errorForm = 'La descripción larga en inglés no puede estar vacía';
-    } else if (values.codigo_en.trim() === ''){
-      errorForm = 'El código de producto en inglés no puede estar vacío';
+    } else if (values.descripcion_en.trim() === ''){
+      errorForm = 'La descripción en inglés no puede estar vacía';
     } else if (values.miniatura.trim() === ''){
       errorForm = 'Falta subir una imagen del taller';
     }
@@ -150,9 +121,7 @@ const AccountDetails = props => {
       }, 3000);
     } else {       
       try {
-        console.log('values post', values);
         const postTaller = await clienteAxios.post('/api/talleres', values);
-        console.log(postTaller);
         
         mensajeSwal.fire({
           title: '¡Excelente!',
@@ -160,7 +129,7 @@ const AccountDetails = props => {
           icon: 'success',
           timer: 3000
         }).then(()=> {
-          // window.location.replace("/talleres");
+          window.location.replace("/talleres");
         });
       } catch (error) {
       mensajeSwal.fire({
@@ -258,7 +227,6 @@ const AccountDetails = props => {
                   //   setFileObjects(nuevoArchivo);
                   // }}
                   onDrop={(nuevoArchivo) => {
-                    console.log('onDrop', nuevoArchivo);
                     setFileObjects(nuevoArchivo);
                   }}
                   onDelete={deleteFileObj => {
@@ -281,34 +249,20 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Descripción corta"
+                label="Descripción en español"
                 margin="dense"
-                name="descripcion_corta_es"
+                name="descripcion_es"
                 onChange={handleChange}
+                multiline={true}
                 required
-                value={values.descripcion_corta_es}
+                value={values.descripcion_es}
                 variant="outlined"
               />
             </Grid>
+
             <Grid
               item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Descripción larga"
-                margin="dense"
-                name="descripcion_larga_es"
-                onChange={handleChange}
-                type="text"
-                value={values.descripcion_larga_es}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
@@ -325,7 +279,7 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
@@ -342,48 +296,20 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
+              md={2}
               xs={6}
             >
               <TextField
                 fullWidth
                 label="Código de compra"
                 margin="dense"
-                name="codigo_es"
+                name="codigo"
                 onChange={handleChange}
                 required
                 type="text"
-                value={values.codigo_es}
+                value={values.codigo}
                 variant="outlined"
               />
-            </Grid>
-            <Grid
-              item
-              md={12}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
             </Grid>
             </Grid>
             </CardContent>
@@ -433,50 +359,18 @@ const AccountDetails = props => {
             </Grid>
             <Grid
               item
-              md={3}
-              xs={6}
-            >
-              <TextField
-                fullWidth
-                label="Código de compra en inglés"
-                margin="dense"
-                name="codigo_en"
-                onChange={handleChange}
-                required
-                type="text"
-                value={values.codigo_en}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
               md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Descripción corta en inglés"
+                label="Descripción en inglés"
                 margin="dense"
-                name="descripcion_corta_en"
-                onChange={handleChange}
-                required
-                value={values.descripcion_corta_en}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Descripción larga en inglés"
-                margin="dense"
-                name="descripcion_larga_en"
+                name="descripcion_en"
+                multiline={true}
                 onChange={handleChange}
                 type="text"
-                value={values.descripcion_larga_en}
+                value={values.descripcion_en}
                 variant="outlined"
               />
             </Grid>
@@ -490,7 +384,6 @@ const AccountDetails = props => {
             color="primary"
             variant="contained"
             type="submit"
-            
           >
             Guardar
           </Button>

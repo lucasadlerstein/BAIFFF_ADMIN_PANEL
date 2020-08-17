@@ -32,8 +32,6 @@ const ProductList = () => {
     const talleresBD = await clienteAxios.get('/api/programacion/todos');
     setTalleres(talleresBD.data);
     setNum(0);
-    console.log(talleres);
-    console.log(num);
   }
   if(num === 1){
     traerTalleres();
