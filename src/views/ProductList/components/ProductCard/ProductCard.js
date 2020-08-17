@@ -147,12 +147,12 @@ const ProductCard = props => {
             item
           >
             <TurnedInNotIcon className={classes.statsIcon} />
-            <a target="_blank" rel="noopener noreferrer" href={`http://baifff.tv/${product.slug_es}`}>
+            <a target="_blank" rel="noopener noreferrer" href={`http://baifff.tv/taller/${product.slug_es}`}>
               <Typography
                 display="inline"
                 variant="body2"
               >
-                {`www.baifff.tv/${product.slug_es}`}
+                {`baifff.tv/taller/${product.slug_es}`}
               </Typography>
             </a>
           </Grid>

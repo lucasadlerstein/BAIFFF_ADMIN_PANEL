@@ -49,7 +49,6 @@ const AccountDetails = props => {
     precio_ars: '',
     precio_usd: '',
     titulo_en: '',
-    slug_en: '',
     descripcion_en: ''
   });
 
@@ -61,7 +60,7 @@ const AccountDetails = props => {
       setEditandoId(id);
   
       try{
-        const resultado = await clienteAxios.get(`/api/talleres/${id}`);
+        const resultado = await clienteAxios.get(`/api/talleres/id/${id}`);
         setValues(resultado.data);
   
         if(resultado.data.status === 'incorrecto'){
@@ -127,10 +126,6 @@ const AccountDetails = props => {
       errorForm = 'El código de producto no puede estar vacío';
     } else if (values.titulo_en.trim() === ''){
       errorForm = 'El titulo en inglés no puede estar vacío';
-    } else if (values.slug_en.trim() === ''){
-      errorForm = 'El slug en inglés no puede estar vacío';
-    } else if (/\s/.test(values.slug_en) || (values.slug_en.indexOf('.') !== -1) ){
-      errorForm = 'El slug en inglés no puede tener espacios ni puntos';
     } else if (values.descripcion_en.trim() === ''){
       errorForm = 'La descripción en inglés no puede estar vacía';
     } else if (values.imagen_es.trim() === ''){
@@ -361,24 +356,7 @@ const AccountDetails = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Slug en inglés"
-                placeholder="workshop-for-filmmakers-about-tecnology"
-                helperText="No puede contener espacios ni puntos"
-                margin="dense"
-                name="slug_en"
-                onChange={handleChange}
-                required
-                value={values.slug_en}
-                variant="outlined"
-              />
-            </Grid>
+
             <Grid
               item
               md={6}
