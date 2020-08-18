@@ -75,7 +75,20 @@ const AccountDetails = props => {
     // eslint-disable-next-line
   }, []);
 
-  const dias = [ 1, 2, 3 ];
+  const dias = [
+    {
+      dia: 1,
+      fecha: '24/09'
+    },
+    {
+      dia: 2,
+      fecha: '25/09'
+    },
+    {
+      dia: 3,
+      fecha: '26/09'
+    }
+  ]
 
   const handleChange = event => {
     setValues({
@@ -314,10 +327,10 @@ const AccountDetails = props => {
               >
                 {dias.map(option => (
                   <option
-                    key={option}
-                    value={option}
+                    key={option.dia}
+                    value={option.dia}
                   >
-                    {option}
+                    {option.fecha}
                   </option>
                 ))}
               </TextField>
