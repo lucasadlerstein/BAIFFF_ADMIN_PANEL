@@ -67,7 +67,7 @@ const Dashboard = () => {
         >
           <TasksProgress films={estadisticas.films} />
         </Grid>
-        <Grid
+        {/* <Grid
           item
           lg={3}
           sm={6}
@@ -75,7 +75,7 @@ const Dashboard = () => {
           xs={12}
         >
           <TotalProfit />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );
