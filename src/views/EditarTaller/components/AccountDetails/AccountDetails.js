@@ -118,9 +118,9 @@ const AccountDetails = props => {
       errorForm = 'El slug no puede tener espacios ni puntos';
     } else if (values.descripcion_es.trim() === ''){
       errorForm = 'La descripción no puede estar vacía';
-    }  else if ((values.precio_ars.trim() === '') || (values.precio_ars < 1) ){
+    }  else if (values.precio_ars < 1 ){
       errorForm = 'Falta el valor del taller en AR$';
-    } else if ((values.precio_usd.trim() === '') || (values.precio_usd < 1) ){
+    } else if (values.precio_usd < 1){
       errorForm = 'Falta el valor del taller en U$D';
     } else if (values.codigo.trim() === ''){
       errorForm = 'El código de producto no puede estar vacío';
