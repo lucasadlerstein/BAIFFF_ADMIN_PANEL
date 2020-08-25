@@ -107,6 +107,7 @@ const UsersTable = props => {
                   <TableCell>Nombre</TableCell>
                   <TableCell>Tipo</TableCell>
                   <TableCell>Nacionalidad</TableCell>
+                  <TableCell>Nacimiento</TableCell>
                   <TableCell>Website</TableCell>
                   <TableCell>Facebook</TableCell>
                   <TableCell>Instagram</TableCell>
@@ -129,6 +130,7 @@ const UsersTable = props => {
                     </TableCell>
                     <TableCell>{user.tipo}</TableCell>
                     <TableCell>{user.nacionalidad}</TableCell>
+                    <TableCell>{user.nacimiento}</TableCell>
                     <TableCell><a href={user.website} target="_blank">{user.website}</a></TableCell>
                     <TableCell>{user.facebook}</TableCell>
                     <TableCell>{user.instagram}</TableCell>
