@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
+import dotenv from  'dotenv';
 import { makeStyles } from '@material-ui/styles';
 import {
   Grid,
@@ -12,6 +13,7 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+// const dotenv = require('dotenv');
 
 const schema = {
   usuario: {
@@ -168,9 +170,10 @@ const SignIn = props => {
     }));
   };
 
+
   const handleSignIn = event => {
     event.preventDefault();
-    if(formState.values.password === 'Infinidad.2020' && formState.values.usuario === 'AdminBAIFFF'){
+    if(formState.values.password === (process.env.REACT_APP_LOGIN_PASS) && formState.values.usuario === (process.env.REACT_APP_LOGIN_USER)){
       let hoy = new Date;
       hoy = hoy.getDate();
       window.localStorage.setItem('ad547sss8456621', (hoy*15));
@@ -180,6 +183,7 @@ const SignIn = props => {
 
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
+      
 
   return (
     <div className={classes.root}>
