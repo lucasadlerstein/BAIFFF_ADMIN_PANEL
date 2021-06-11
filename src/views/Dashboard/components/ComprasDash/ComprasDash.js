@@ -3,7 +3,9 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
-import FlashOnIcon from '@material-ui/icons/FlashOn';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import MoneyOffIcon from '@material-ui/icons/MoneyOff';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +18,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontWeight: 700
   },
-  avatar: {
+  avatarVerde: {
+    backgroundColor: theme.palette.success.main,
+    height: 56,
+    width: 56
+  },
+  avatarRojo: {
     backgroundColor: theme.palette.error.main,
     height: 56,
     width: 56
@@ -31,16 +38,16 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   differenceIcon: {
-    color: theme.palette.error.dark
+    color: theme.palette.success.dark
   },
   differenceValue: {
-    color: theme.palette.error.dark,
+    color: theme.palette.success.dark,
     marginRight: theme.spacing(1)
   }
 }));
 
-const Budget = (props) => {
-  const { talleres, className, ...rest } = props;
+const ComprasDash = props => {
+  const { numero, texto, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -57,17 +64,32 @@ const Budget = (props) => {
           <Grid item>
             <Typography
               className={classes.title}
-              color="textSecondary"
+              color="inherit"
               gutterBottom
               variant="body2"
             >
-              MASTERCLASSES
+              {texto}
             </Typography>
-            <Typography variant="h3">{talleres}</Typography>
+            <Typography
+              color="inherit"
+              variant="h3"
+            >
+              {numero}
+            </Typography>
           </Grid>
           <Grid item>
-            <Avatar className={classes.avatar}>
-              <FlashOnIcon className={classes.icon} />
+            <Avatar className={texto === 'MASTERCLASSES SIN PAGAR' ? classes.avatarRojo : classes.avatarVerde}>
+              {
+                (texto === 'MASTERCLASSES COMPRADOS') ? (
+                  <EmojiObjectsIcon className={classes.icon} />
+                ) : (
+                  (texto === 'MASTERCLASSES PAGAS') ? (
+                    <AttachMoneyIcon className={classes.icon} />
+                  ) : (
+                    <MoneyOffIcon className={classes.icon} />
+                  )
+                )
+              }
             </Avatar>
           </Grid>
         </Grid>
@@ -76,8 +98,8 @@ const Budget = (props) => {
   );
 };
 
-Budget.propTypes = {
+ComprasDash.propTypes = {
   className: PropTypes.string
 };
 
-export default Budget;
+export default ComprasDash;

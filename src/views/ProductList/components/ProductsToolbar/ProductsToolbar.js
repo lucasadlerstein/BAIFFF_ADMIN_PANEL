@@ -34,12 +34,12 @@ const ProductsToolbar = props => {
       <div className={classes.row}>
         <span className={classes.spacer} />
         {/* <Button className={classes.exportButton}>Exportar</Button> */}
-        <Link to="/nuevo-taller">
+        <Link to="/nuevo-masterclass">
           <Button
             color="primary"
             variant="contained"
           >
-            Nuevo taller
+            Nueva masterclass
           </Button>
         </Link>
       </div>

@@ -64,7 +64,7 @@ const AccountDetails = props => {
         setValues(resultado.data);
   
         if(resultado.data.status === 'incorrecto'){
-          history.push("/talleres");
+          history.push("/masterclasses");
         }
       }catch(error){
       } 
@@ -119,9 +119,9 @@ const AccountDetails = props => {
     } else if (values.descripcion_es.trim() === ''){
       errorForm = 'La descripción no puede estar vacía';
     }  else if (values.precio_ars < 1 ){
-      errorForm = 'Falta el valor del taller en AR$';
+      errorForm = 'Falta el valor del masterclass en AR$';
     } else if (values.precio_usd < 1){
-      errorForm = 'Falta el valor del taller en U$D';
+      errorForm = 'Falta el valor del masterclass en U$D';
     } else if (values.codigo.trim() === ''){
       errorForm = 'El código de producto no puede estar vacío';
     } else if (values.titulo_en.trim() === ''){
@@ -129,7 +129,7 @@ const AccountDetails = props => {
     } else if (values.descripcion_en.trim() === ''){
       errorForm = 'La descripción en inglés no puede estar vacía';
     } else if (values.imagen_es.trim() === ''){
-      errorForm = 'Falta subir una imagen del taller';
+      errorForm = 'Falta subir una imagen del masterclass';
     }
     
     const mensajeSwal = withReactContent(Swal);
@@ -147,11 +147,11 @@ const AccountDetails = props => {
   
         mensajeSwal.fire({
           title: '¡Excelente!',
-          text: `El taller fue agregado con éxito`,
+          text: `La masterclass fue agregada con éxito`,
           icon: 'success',
           timer: 3000
         }).then(()=> {
-          window.location.href = "/talleres";
+          window.location.href = "/masterclasses";
         });
       } catch (error) {
         mensajeSwal.fire({
@@ -192,7 +192,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Titulo del taller en español"
+                helperText="Titulo del masterclass en español"
                 label="Título"
                 margin="dense"
                 name="titulo_es"
@@ -346,7 +346,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Titulo del taller en inglés"
+                helperText="Titulo de la masterclass en inglés"
                 label="Título en inglés"
                 margin="dense"
                 name="titulo_en"

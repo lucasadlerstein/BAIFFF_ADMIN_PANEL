@@ -9,6 +9,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import TheatersIcon from '@material-ui/icons/Theaters';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { Profile, SidebarNav } from './components';
 
@@ -52,8 +53,8 @@ const Sidebar = props => {
       icon: <PeopleIcon />
     },
     {
-      title: 'Talleres',
-      href: '/talleres',
+      title: 'MasterClasses',
+      href: '/masterclasses',
       icon: <FlashOnIcon />
     },
     {
@@ -70,6 +71,11 @@ const Sidebar = props => {
       title: 'Films',
       href: '/films',
       icon: <TheatersIcon />
+    },
+    {
+      title: 'Compras',
+      href: '/compras',
+      icon: <AttachMoneyIcon />
     }
   ];
 

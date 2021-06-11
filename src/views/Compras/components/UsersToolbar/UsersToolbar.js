@@ -29,14 +29,14 @@ const UsersToolbar = props => {
 
   const descargarAsistentes = async () => {
     axios({
-      url: `${process.env.REACT_APP_BASE_URL}/api/asistentes/descargar`,
+      url: `${process.env.REACT_APP_BASE_URL}/api/compra/descargar`,
       method: 'GET',
       responseType: 'blob',
     }).then((response) => {
        const url = window.URL.createObjectURL(new Blob([response.data]));
        const link = document.createElement('a');
        link.href = url;
-       link.setAttribute('download', 'asistentes.xlsx');
+       link.setAttribute('download', 'comprasmasterclasses.xlsx');
        document.body.appendChild(link);
        link.click();
     });

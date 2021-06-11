@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clienteAxios = axios.create({
-    baseURL: 'https://api.baifff.tv'
+    baseURL: process.env.REACT_APP_BASE_URL
 });
 
 export default clienteAxios;

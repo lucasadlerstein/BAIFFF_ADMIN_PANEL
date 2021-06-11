@@ -351,8 +351,8 @@ const AccountDetails = props => {
           </CardContent>
           <CardContent>
             <CardHeader
-              subheader="Solo para talleres donde la agenda los lleve a la página del taller y esté incluído ahí el acceso rápido"
-              title="OPCIONAL TALLERES"
+              subheader="Solo para masterclasses donde la agenda los lleve a la página del masterclass y esté incluído ahí el acceso rápido"
+              title="OPCIONAL MASTERCLASSES"
             />
             <Divider />
             <Grid
@@ -366,11 +366,11 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Botón taller en español"
+                label="Botón masterclass en español"
                 margin="dense"
                 name="boton_es"
                 onChange={handleChange}
-                helperText="Opcional solo para talleres o links externos"
+                helperText="Opcional solo para masterclasses o links externos"
                 type="text"
                 value={values.boton_es}
                 variant="outlined"
@@ -383,11 +383,11 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Botón taller en inglés"
+                label="Botón masterclass en inglés"
                 margin="dense"
                 name="boton_en"
                 onChange={handleChange}
-                helperText="Opcional solo para talleres o links externos"
+                helperText="Opcional solo para masterclasses o links externos"
                 type="text"
                 value={values.boton_en}
                 variant="outlined"
@@ -400,11 +400,11 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Link del taller o website externo"
+                label="Link del masterclass o website externo"
                 margin="dense"
                 name="link"
                 onChange={handleChange}
-                helperText="Opcional solo para talleres o links externos"
+                helperText="Opcional solo para masterclasses o links externos"
                 type="text"
                 value={values.link}
                 variant="outlined"

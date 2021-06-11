@@ -11,3 +11,4 @@ export { default as UserList } from './UserList';
 export { default as Agenda } from './Agenda';
 export { default as NuevoAgenda } from './NuevoAgenda';
 export { default as EditarAgenda } from './EditarAgenda';
+export { default as Compras } from './Compras';

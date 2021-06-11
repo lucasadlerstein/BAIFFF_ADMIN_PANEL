@@ -83,7 +83,7 @@ const ProductCard = props => {
         } catch (error) {
           ConfirmacionSwal.fire({
             title: 'Ups!',
-            text: "No pudimos eliminar el taller",
+            text: "No pudimos eliminar la masterclass",
             icon: 'error',
             timer: 2000,
           });
@@ -118,7 +118,7 @@ const ProductCard = props => {
           <img
             alt={product.titulo_es}
             className={classes.image}
-            src={`https://api.baifff.tv/static/${product.imagen_es}`}
+            src={`${process.env.REACT_APP_BASE_URL}/static/${product.imagen_es}`}
           />
         </div>
         <Typography
@@ -147,12 +147,12 @@ const ProductCard = props => {
             item
           >
             <TurnedInNotIcon className={classes.statsIcon} />
-            <a target="_blank" rel="noopener noreferrer" href={`http://baifff.tv/taller/${product.slug_es}`}>
+            <a target="_blank" rel="noopener noreferrer" href={`http://baifff.tv/masterclass/${product.slug_es}`}>
               <Typography
                 display="inline"
                 variant="body2"
               >
-                {`baifff.tv/taller/${product.slug_es}`}
+                {`baifff.tv/masterclass/${product.slug_es}`}
               </Typography>
             </a>
           </Grid>
@@ -168,7 +168,7 @@ const ProductCard = props => {
                   <VisibilityIcon />
                 ) }
               </IconButton>
-            <Link to={`/editar-taller?id=${product.id}`}>
+            <Link to={`/editar-masterclass?id=${product.id}`}>
               <IconButton>
                 <CreateIcon />
               </IconButton>

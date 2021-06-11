@@ -16,7 +16,8 @@ import {
   Films as FilmsView,
   Agenda as AgendaView,
   NuevoAgenda as NuevoAgendaView,
-  EditarAgenda as EditarAgendaView
+  EditarAgenda as EditarAgendaView,
+  Compras as ComprasView
 } from './views';
 
 const Routes = () => {
@@ -43,7 +44,7 @@ const Routes = () => {
         component={ProductListView}
         exact
         layout={MainLayout}
-        path="/talleres"
+        path="/masterclasses"
       />
       <RouteWithLayout
         component={AgendaView}
@@ -67,13 +68,13 @@ const Routes = () => {
         component={NuevoTallerView}
         exact
         layout={MainLayout}
-        path="/nuevo-taller"
+        path="/nuevo-masterclass"
       />
       <RouteWithLayout
         component={EditarTallerView}
         exact
         layout={MainLayout}
-        path="/editar-taller"
+        path="/editar-masterclass"
       />
       <RouteWithLayout
         component={NuevoAgendaView}
@@ -86,6 +87,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/editar-agenda"
+      />
+      <RouteWithLayout
+        component={ComprasView}
+        exact
+        layout={MainLayout}
+        path="/compras"
       />
       <RouteWithLayout
         component={SignInView}

@@ -8,11 +8,15 @@ import {
   TotalUsers,
   TasksProgress,
   TotalProfit,
+  ComprasDash
 } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
+  },
+  aboutTalleres: {
+    fontFamily: 'Roboto' 
   }
 }));
 
@@ -22,7 +26,9 @@ const Dashboard = () => {
   const [estadisticas, setEstadisticas] = useState({
     talleres: 0,
     asistentes: 0,
-    films: 0
+    films: 0,
+    totalCompras: 0,
+    totalComprasPagas: 0
   });
 
   useEffect(() => {
@@ -67,15 +73,51 @@ const Dashboard = () => {
         >
           <TasksProgress films={estadisticas.films} />
         </Grid>
-        {/* <Grid
+        <Grid
           item
           lg={3}
           sm={6}
           xl={3}
           xs={12}
         >
-          <TotalProfit />
-        </Grid> */}
+          <TotalProfit programacion={estadisticas.programacion} />
+        </Grid>
+        <Grid
+          item
+          lg={12}
+          sm={12}
+          xl={12}
+          xs={12}
+        >
+          <h2 className={classes.aboutTalleres}>ABOUT MASTERCLASSES</h2>
+        </Grid>
+        <Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <ComprasDash numero={estadisticas.totalCompras} texto="MASTERCLASSES COMPRADOS" />
+        </Grid>
+        <Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <ComprasDash numero={estadisticas.totalCompras - estadisticas.totalComprasPagas} texto="MASTERCLASSES SIN PAGAR" />
+        </Grid>
+        <Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <ComprasDash numero={estadisticas.totalComprasPagas} texto="MASTERCLASSES PAGAS" />
+        </Grid>
       </Grid>
     </div>
   );

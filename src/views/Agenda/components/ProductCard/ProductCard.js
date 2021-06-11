@@ -126,7 +126,7 @@ const ProductCard = props => {
           <img
             alt={product.titulo_es}
             className={classes.image}
-            src={`https://api.baifff.tv/static/${product.imagen}`}
+            src={`${process.env.REACT_APP_BASE_URL}/static/${product.imagen}`}
           />
         </div>
         <Typography
